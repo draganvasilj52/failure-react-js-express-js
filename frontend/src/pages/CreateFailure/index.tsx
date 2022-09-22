@@ -69,7 +69,7 @@ const CreateFailure: React.FC = () => {
     mutation.mutate(formData)
 
     setFirstName('')
-    setFirstName('')
+    setLastName('')
     setFailure('')
     setAddress('')
     setFile('')
