@@ -6,31 +6,29 @@ import {
 } from '../../styles/Navbar.style'
 import HeaderLeft from './HeaderLeft'
 import HeaderRight from './HeaderRight'
-import { MyProps } from '../../types'
+import { useState } from 'react'
 
-const Header: React.FC<MyProps> = (props: MyProps) => {
+const Header: React.FC = () => {
+  const [openBurger, setOpenBurger] = useState<boolean>(false)
   return (
-    <NavbarMainContainer openBurger={props.openBurger}>
+    <NavbarMainContainer openBurger={openBurger}>
       <NavbarInnerContainer>
-        <HeaderLeft
-          openBurger={props.openBurger}
-          setOpenBurger={props.setOpenBurger}
-        />
-        <HeaderRight setOpenBurger={props.setOpenBurger} />
+        <HeaderLeft openBurger={openBurger} setOpenBurger={setOpenBurger} />
+        <HeaderRight setOpenBurger={setOpenBurger} />
       </NavbarInnerContainer>
-      {props.openBurger && (
+      {openBurger && (
         <NavbarExtendedContainer>
-          <NavbarExtendedLink onClick={() => props.setOpenBurger(false)} to="/">
+          <NavbarExtendedLink onClick={() => setOpenBurger(false)} to="/">
             Home
           </NavbarExtendedLink>
           <NavbarExtendedLink
-            onClick={() => props.setOpenBurger(false)}
+            onClick={() => setOpenBurger(false)}
             to="/createfailure"
           >
             Create Failure
           </NavbarExtendedLink>
           <NavbarExtendedLink
-            onClick={() => props.setOpenBurger(false)}
+            onClick={() => setOpenBurger(false)}
             to="/getfailures"
           >
             Get All Failures

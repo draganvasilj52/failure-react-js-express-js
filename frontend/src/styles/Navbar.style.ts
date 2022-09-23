@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export const NavbarMainContainer = styled.nav`
   height: ${({ openBurger }: { openBurger: Boolean }) =>
     openBurger ? '100vh' : '80px'};
+
   background-color: ${({ theme }) => theme.colors.header};
   display: flex;
   flex-direction: column;
@@ -11,6 +12,10 @@ export const NavbarMainContainer = styled.nav`
   @media (min-width: ${({ theme }) => theme.mobile}) {
     height: 80px;
   }
+  position: ${({ openBurger }: { openBurger: Boolean }) =>
+    openBurger && 'fixed'};
+  right: ${({ openBurger }: { openBurger: Boolean }) => openBurger && '0px'};
+  left: ${({ openBurger }: { openBurger: Boolean }) => openBurger && '0px'};
 `
 
 export const NavbarInnerContainer = styled.div`

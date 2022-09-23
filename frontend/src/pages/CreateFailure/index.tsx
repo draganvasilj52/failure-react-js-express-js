@@ -106,6 +106,7 @@ const CreateFailure: React.FC = () => {
     setFailure(e.target.value)
   }
 
+  console.log(address)
   return (
     <InputWrapper>
       <h2>Submit Failure</h2>
@@ -114,7 +115,9 @@ const CreateFailure: React.FC = () => {
       <Label>Enter LastName</Label>
       <Input type="text" value={lastName} onChange={handleLastName} />
       <Label>Enter Address</Label>
-      <Input type="text" value={address} onChange={handleAddress} />
+
+      <Input value={address} onChange={handleAddress} />
+
       <Label>Enter Failure Description</Label>
       <TextArea value={failure} onChange={handleFailure} />
       <input
