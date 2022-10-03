@@ -14,12 +14,13 @@ import { Err } from '../../types'
 import Addresses from '../../components/Addresses'
 
 const CreateFailure: React.FC = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [initialValues, setInitialValues] = useState({
+    firstName: '',
+    lastName: '',
+    failure: '',
+  })
   const [address, setAddress] = useState('')
-  const [failure, setFailure] = useState('')
   const [file, setFile] = useState<any>()
-
   const [success, setSuccess] = useState('')
 
   const addFailure = (data: FormData): AxiosPromise<FormData> => {
@@ -38,12 +39,14 @@ const CreateFailure: React.FC = () => {
     mutationFn: addFailure,
     onSuccess: () => {
       setSuccess('Failure Successfully Created')
-      setFirstName('')
-      setLastName('')
-      setFailure('')
+      setInitialValues((prev) => ({
+        ...prev,
+        firstName: '',
+        lastName: '',
+        failure: '',
+      }))
       setAddress('')
       setFile('')
-      setFirstName('')
     },
   })
 
@@ -67,46 +70,45 @@ const CreateFailure: React.FC = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
+    formData.append('firstName', initialValues.firstName)
+    formData.append('lastName', initialValues.lastName)
     formData.append('address', address)
-    formData.append('failure', failure)
+    formData.append('failure', initialValues.failure)
     formData.append('image', file)
 
     mutation.mutate(formData)
   }
 
-  const handleFirstName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (e) => {
     if (e.target.value !== '') {
       mutation.reset()
       setSuccess('')
     }
-    setFirstName(e.target.value)
-  }
-
-  const handleLastName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.target.value !== '') {
-      mutation.reset()
-      setSuccess('')
-    }
-    setLastName(e.target.value)
-  }
-
-  const handleFailure: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    if (e.target.value !== '') {
-      mutation.reset()
-      setSuccess('')
-    }
-    setFailure(e.target.value)
+    setInitialValues((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
   }
 
   return (
     <InputWrapper>
       <h2>Submit Failure</h2>
       <Label>Enter FirstName</Label>
-      <Input type="text" value={firstName} onChange={handleFirstName} />
+      <Input
+        type="text"
+        name="firstName"
+        value={initialValues.firstName}
+        onChange={handleChange}
+      />
       <Label>Enter LastName</Label>
-      <Input type="text" value={lastName} onChange={handleLastName} />
+      <Input
+        type="text"
+        name="lastName"
+        value={initialValues.lastName}
+        onChange={handleChange}
+      />
 
       <Addresses
         setAddress={setAddress}
@@ -115,7 +117,11 @@ const CreateFailure: React.FC = () => {
       />
 
       <Label>Enter Failure Description</Label>
-      <TextArea value={failure} onChange={handleFailure} />
+      <TextArea
+        name="failure"
+        value={initialValues.failure}
+        onChange={handleChange}
+      />
       <input
         type="file"
         ref={filePickerRef}
