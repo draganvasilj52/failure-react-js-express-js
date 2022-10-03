@@ -20,7 +20,7 @@ const CreateFailure: React.FC = () => {
     failure: '',
   })
   const [address, setAddress] = useState('')
-  const [file, setFile] = useState<any>()
+  const [file, setFile] = useState<File | string>('')
   const [success, setSuccess] = useState('')
 
   const addFailure = (data: FormData): AxiosPromise<FormData> => {
@@ -49,7 +49,7 @@ const CreateFailure: React.FC = () => {
       setFile('')
     },
   })
-
+  console.log(file)
   const filePickerRef: React.MutableRefObject<any> = useRef()
 
   const pickImageHandler = () => {
