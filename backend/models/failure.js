@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const geocoder = require('../utils/geocoder')
 
 const FailuresSchema = new Schema({
   firstName: { type: String, required: true },
@@ -11,7 +10,7 @@ const FailuresSchema = new Schema({
   },
   image: { type: String, required: true },
   address: { type: String, required: true },
-  location: {
+  /*   location: {
     type: {
       type: String,
       enum: ['Point'],
@@ -20,17 +19,10 @@ const FailuresSchema = new Schema({
       type: [Number],
     },
     formattedAddress: String,
+  }, */
+  coordinates: {
+    type: [Number],
   },
-})
-
-FailuresSchema.pre('save', async function (next) {
-  const loc = await geocoder.geocode(this.address)
-  this.location = {
-    type: 'Point',
-    coordinates: [loc[0].latitude, loc[0].longitude],
-    formattedAddress: loc[0].formattedAddress,
-  }
-  next()
 })
 
 module.exports = mongoose.model('Failure', FailuresSchema)

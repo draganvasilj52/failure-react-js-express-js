@@ -13,7 +13,7 @@ export const NavbarMainContainer = styled.nav`
     height: 80px;
   }
   position: ${({ openBurger }: { openBurger: Boolean }) =>
-    openBurger && 'fixed'};
+    openBurger && 'fixed z-20'};
   right: ${({ openBurger }: { openBurger: Boolean }) => openBurger && '0px'};
   left: ${({ openBurger }: { openBurger: Boolean }) => openBurger && '0px'};
 `

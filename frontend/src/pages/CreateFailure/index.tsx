@@ -11,6 +11,7 @@ import {
 } from '../../styles/Input.style'
 import { Button } from './../../styles/Input.style'
 import { Err } from '../../types'
+import Addresses from '../../components/Addresses'
 
 const CreateFailure: React.FC = () => {
   const [firstName, setFirstName] = useState('')
@@ -37,6 +38,12 @@ const CreateFailure: React.FC = () => {
     mutationFn: addFailure,
     onSuccess: () => {
       setSuccess('Failure Successfully Created')
+      setFirstName('')
+      setLastName('')
+      setFailure('')
+      setAddress('')
+      setFile('')
+      setFirstName('')
     },
   })
 
@@ -67,13 +74,6 @@ const CreateFailure: React.FC = () => {
     formData.append('image', file)
 
     mutation.mutate(formData)
-
-    setFirstName('')
-    setLastName('')
-    setFailure('')
-    setAddress('')
-    setFile('')
-    setFirstName('')
   }
 
   const handleFirstName: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -91,13 +91,7 @@ const CreateFailure: React.FC = () => {
     }
     setLastName(e.target.value)
   }
-  const handleAddress: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.target.value !== '') {
-      mutation.reset()
-      setSuccess('')
-    }
-    setAddress(e.target.value)
-  }
+
   const handleFailure: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.target.value !== '') {
       mutation.reset()
@@ -106,7 +100,6 @@ const CreateFailure: React.FC = () => {
     setFailure(e.target.value)
   }
 
-  console.log(address)
   return (
     <InputWrapper>
       <h2>Submit Failure</h2>
@@ -114,9 +107,12 @@ const CreateFailure: React.FC = () => {
       <Input type="text" value={firstName} onChange={handleFirstName} />
       <Label>Enter LastName</Label>
       <Input type="text" value={lastName} onChange={handleLastName} />
-      <Label>Enter Address</Label>
 
-      <Input value={address} onChange={handleAddress} />
+      <Addresses
+        setAddress={setAddress}
+        address={address}
+        setSuccess={setSuccess}
+      />
 
       <Label>Enter Failure Description</Label>
       <TextArea value={failure} onChange={handleFailure} />

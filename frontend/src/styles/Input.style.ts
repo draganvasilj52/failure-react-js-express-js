@@ -1,3 +1,4 @@
+import { map } from 'leaflet'
 import styled from 'styled-components'
 
 export const InputWrapper = styled.div`
@@ -11,7 +12,7 @@ export const InputWrapper = styled.div`
 `
 
 export const Input = styled.input`
-  width: 350px;
+  width: 450px;
   border-radius: 30px;
   border: none;
   height: 30px;
@@ -45,7 +46,7 @@ export const TextArea = styled.textarea`
   &:focus {
     outline: none;
   }
-  width: 350px;
+  width: 450px;
   height: 140px;
   border-radius: 10px;
   margin-bottom: 10px;

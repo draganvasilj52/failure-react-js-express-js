@@ -3,10 +3,13 @@ const mongoose = require('mongoose')
 const fs = require('fs')
 const path = require('path')
 const cors = require('cors')
+const dotenv = require('dotenv')
 const failureRoutes = require('./routes/failures-routes')
 
 const app = express()
 app.use(express.json())
+
+dotenv.config()
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')))
 

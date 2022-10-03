@@ -1,5 +1,6 @@
 const Failure = require('../models/failure')
 const { validationResult } = require('express-validator')
+const axios = require('axios')
 
 const getAllFailures = async (req, res, next) => {
   let failures
@@ -10,9 +11,8 @@ const getAllFailures = async (req, res, next) => {
     error.code = 500
     return next(error)
   }
-  setTimeout(() => {
-    res.json({ failures })
-  }, 3000)
+
+  res.json({ failures })
 }
 
 const createFailure = async (req, res, next) => {
@@ -30,12 +30,27 @@ const createFailure = async (req, res, next) => {
     return next(error)
   }
 
+  try {
+    const response = await axios.get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+        address
+      )}.json?access_token=${process.env.access_token}`
+    )
+
+    const data = response.data
+
+    coordinates = data.features[0].geometry.coordinates
+  } catch (err) {
+    console.log(err)
+  }
+
   const newFailure = new Failure({
     firstName,
     lastName,
     address,
     failure,
     image: req.file.path,
+    coordinates,
   })
 
   try {

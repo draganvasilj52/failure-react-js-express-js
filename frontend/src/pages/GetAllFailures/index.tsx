@@ -1,31 +1,35 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet'
-
+import {
+  FailureCard,
+  FailureText,
+  FailureWrapper,
+} from './../../styles/Failure.style'
+import type { Failure } from '../../types'
+import MapRender from './../../components/MapRender'
 const GetAllFailures: React.FC = () => {
   const { data } = useQuery(['failures'], ({ signal }) => {
     return axios.get('http://localhost:5000/failures', { signal })
   })
 
   return (
-    <>
-      {data?.data.failures.map((item: any) => (
-        <>
+    <FailureWrapper>
+      {data?.data.failures.map((item: Failure, index: React.Key) => (
+        <FailureCard key={index}>
+          <FailureText>
+            User: {item.firstName} {item.lastName}
+          </FailureText>
+          <FailureText>Description: {item.failure}</FailureText>
           <img
-            key={item?._id}
-            alt={item?._id}
-            src={`http://localhost:5000/${item?.image}`}
+            alt=""
+            style={{ paddingBottom: '10px' }}
+            src={`http://localhost:5000/${item.image}`}
           />
-          <MapContainer center={item.location.coordinates} zoom={12}>
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={item.location.coordinates} />
-          </MapContainer>
-        </>
+          <FailureText>Address: {item.address}</FailureText>
+          <MapRender item={item} />
+        </FailureCard>
       ))}
-    </>
+    </FailureWrapper>
   )
 }
 

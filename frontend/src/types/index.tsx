@@ -1,16 +1,12 @@
-export type Data = {
+export type Failure = {
   firstName: string
   lastName: string
   address: string
   image: string
   failure: string
+  coordinates: number[]
 }
 
 export type Err = {
   message: string
-}
-
-export type MyProps = {
-  openBurger: boolean
-  setOpenBurger: React.Dispatch<React.SetStateAction<boolean>>
 }
