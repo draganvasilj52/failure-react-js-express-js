@@ -4,7 +4,7 @@ import {
   AbsoluteAddressWrapper,
 } from '../styles/Address.style'
 import React, { useState } from 'react'
-import { Input, Label } from '../styles/Input.style'
+import { Input, Label } from '../styles/Form.style'
 import axios from 'axios'
 
 const Addresses: React.FC<{

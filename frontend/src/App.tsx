@@ -5,7 +5,7 @@ import Header from './containers/Header'
 
 const theme = {
   colors: {
-    header: 'blue',
+    header: '#2cb1bc',
   },
   mobile: '700px',
 }

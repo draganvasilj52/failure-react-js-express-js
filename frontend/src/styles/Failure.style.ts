@@ -15,8 +15,7 @@ export const FailureCard = styled.div`
   justify-content: center;
   border-radius: 30px;
   background-color: white;
-
-  width: 80%;
+  width: 90%;
   margin-top: 20px;
   padding-top: 20px;
   margin-bottom: 40px;
@@ -24,7 +23,6 @@ export const FailureCard = styled.div`
 export const FailureText = styled.p`
   margin: 0;
   padding: 0;
-  color: blue;
   text-align: center;
   line-height: 1.5;
   padding-bottom: 10px;

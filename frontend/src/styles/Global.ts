@@ -12,8 +12,8 @@ body {
     margin: 0;
     font-family: 'Nunito-Sans',sans-serif;
     font-size:1.1rem;
-    color:gray;
-    background-color: aliceblue;
+    color:#102A43;
+    background-color: #f0f4f8;
 }
 
 img {
