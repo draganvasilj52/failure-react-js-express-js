@@ -22,7 +22,10 @@ const GetAllFailures: React.FC = () => {
           <FailureText>Description: {item.failure}</FailureText>
           <img
             alt=""
-            style={{ paddingBottom: '10px', width: '600px', height: '600px' }}
+            style={{
+              paddingBottom: '10px',
+              maxWidth: '100%',
+            }}
             src={`http://localhost:5000/${item.image}`}
           />
           <FailureText>Address: {item.address}</FailureText>

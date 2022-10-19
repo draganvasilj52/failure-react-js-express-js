@@ -16,6 +16,7 @@ export const FailureCard = styled.div`
   border-radius: 30px;
   background-color: white;
   width: 90%;
+  min-height: 70vh;
   margin-top: 20px;
   padding-top: 20px;
   margin-bottom: 40px;
