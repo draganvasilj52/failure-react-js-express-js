@@ -9,7 +9,7 @@ export const RelativeAddressWrapper = styled.div`
 `
 export const AbsoluteAddressWrapper = styled.div`
   width: 450px;
-  background-color: blue;
+  background-color: #2cb1bc;
   z-index: 10;
   position: absolute;
   top: 63px;
